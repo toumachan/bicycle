@@ -1,0 +1,253 @@
+/*-------------------------------------------
+色の設定
+-------------------------------------------*/
+$primary-color: #24292E;
+
+/*-------------------------------------------
+breakpointの設定
+-------------------------------------------*/
+$mq-breakpoints: (
+  lg: 1280px, // パソコン
+  md: 768px,  // タブレット
+  sm: 480px)  // スマホ横向き
+  !default;
+
+/*-------------------------------------------
+Media Queryの設定
+-------------------------------------------*/
+@mixin mq($breakpoint: md, $rule: min, $subtraction: false) {
+  $breakpoint: map_get($mq-breakpoints, $breakpoint);
+
+  @if $rule==max and $subtraction {
+    $breakpoint: $breakpoint - 0.0625;
+  }
+
+  @media screen and (#{$rule}-width: $breakpoint) {
+    @content;
+  }
+}
+
+/*-------------------------------------------
+リセットCSS
+-------------------------------------------*/
+* {
+  font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans";
+  color: $primary-color;
+  box-sizing: border-box;
+  font-size: 10px;
+}
+a {
+  text-decoration: none;
+  transition: all .5s;
+  &::before {
+    transition: all .5s;
+  }
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+ul {
+  list-style: none;
+}
+h2 {
+  font-size: 3.2rem;
+}
+h3 {
+  font-size: 1.6rem;
+}
+p, a, li {
+  font-size: 1.4rem;
+  line-height: 1.8;
+}
+
+/*-------------------------------------------
+共通クラス
+-------------------------------------------*/
+.flex_row {
+  display: flex;
+  flex-direction: column;
+  @include mq(sm) {
+    flex-direction: row;
+  }
+}
+.flex_column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/*-------------------------------------------
+Html
+-------------------------------------------*/
+html {
+  scroll-behavior: smooth;
+}
+
+/*-------------------------------------------
+Body
+-------------------------------------------*/
+body {
+  padding-top: 50px;
+  @include mq(sm) {
+    padding-top: 0;
+  }
+}
+
+/*-------------------------------------------
+Header
+-------------------------------------------*/
+header {
+  position: fixed;
+  top: 0;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 860px;
+  padding: 10px 15px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  @include mq(sm) {
+    position: static;
+  }
+
+  .logo {
+    width: 90px;
+    @include mq(md) {
+      width: 120px;
+    }
+
+    a {
+      display: block;
+      height: 30px;
+      @include mq(md) {
+        height: 40px;
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+
+  .menu {
+    ul {
+      display: flex;
+      gap: 30px;
+      font-size: 0.9rem;
+      li {
+        @include mq(md) {
+          a {
+            position: relative;
+            padding-bottom: 5px;
+            &::before {
+              content: '';
+              position: absolute;
+              bottom: 0;
+              left: 50%;
+              transform: translateX(-50%);
+              width: 0;
+              height: 1px;
+              background: $primary-color;
+            }
+            &:hover::before {
+              content: '';
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/*-------------------------------------------
+MV
+-------------------------------------------*/
+.mv {
+  width: 100%;
+  height: 600px;
+  background: url(../image/mainvisual.jpg) no-repeat center / cover;
+}
+
+/*-------------------------------------------
+Section
+-------------------------------------------*/
+section {
+  padding: 0 15px;
+  @include mq(sm) {
+    padding: 0 4%;
+  }
+}
+.section-ttl {
+  font-weight: 600;
+  text-align: center;
+  text-decoration: underline;
+  text-underline-offset: 15px;
+  text-decoration-thickness: 1px;
+}
+
+/*-------------------------------------------
+About
+-------------------------------------------*/
+.about {
+  padding-top: 80px;
+  .about__item {
+    padding-top: 60px;
+    align-items: center;
+    gap: 10px 0;
+    @include mq(sm) {
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      width: 100%;
+      max-width: 530px;
+    }
+    @include mq(md) {
+      padding-top: 70px;
+    }
+    .about__item__left {
+      flex-shrink: 0;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+    .about__item__right {
+      .about__item-ttl {
+        padding-bottom: 15px;
+      }
+    }
+  }
+}
+
+/*-------------------------------------------
+Bicycle
+-------------------------------------------*/
+.bicycle {
+  padding-top: 100px;
+  .bicycle__articles {
+    padding-top: 60px;
+    gap: 30px 0;
+    @include mq(sm) {
+      width: 100%;
+      gap: 0 15px;
+      justify-content: center;
+    }
+    .bicycle__articles__item {
+      gap: 10px 0;
+    }
+  }
+}
+
+/*-------------------------------------------
+Footer
+-------------------------------------------*/
+footer {
+  padding: 110px 0 10px;
+  .copy-right {
+    font-size: 0.8rem;
+    text-align: center;
+  }
+}

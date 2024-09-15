@@ -111,6 +111,7 @@ header {
   align-items: center;
   @include mq(sm) {
     position: static;
+    box-shadow: none;
   }
 
   .logo {

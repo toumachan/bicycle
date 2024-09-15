@@ -105,6 +105,7 @@ header {
 @media screen and (min-width: 480px) {
   header {
     position: static;
+    box-shadow: none;
   }
 }
 header .logo {
